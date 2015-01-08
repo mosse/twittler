@@ -8,18 +8,21 @@
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
+        setInterval(function(){
+          // var button = $('<div><button>Refresh Tweets</button></div>');
+          var $body = $('body');
+          $body.html('');
+          // button.prependTo($body);
+          
+          var index = streams.home.length - 1;
+          while(index >= 0){
+            var tweet = streams.home[index];
+            var $tweet = $('<ul></ul>');
+            $tweet.text(  tweet.user + ': ' + tweet.message + " TWEETED AT: " + tweet.created_at);
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        },100);
       });
 
     </script>
