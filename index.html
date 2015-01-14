@@ -3,26 +3,111 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link src="style.css" type="text/css">
   </head>
   <body>
     <script>
 
       $(document).ready(function(){
+
+      var autoRefresh = function(func){
         setInterval(function(){
-          // var button = $('<div><button>Refresh Tweets</button></div>');
-          var $body = $('body');
-          $body.html('');
-          // button.prependTo($body);
-          
+          func();
+        }, 500);
+      };
+
+      var allUsers = function(){
+        var $body = $('body');
+        $body.html('');
+
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<ul></ul>');
-            $tweet.text(  tweet.user + ': ' + tweet.message + " TWEETED AT: " + tweet.created_at);
+            var $tweet = $('<div class="' + tweet.user +'"></div>');
+            $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
           }
-        },100);
+      };
+
+// These next four functions need refactoring. Too much repetition.
+
+         var onlyShawnDrost = function(){
+          var $body = $('body');
+          $body.html('');
+
+            var index = streams.users.shawndrost.length - 1;
+            while(index >= 0){
+              var tweet = streams.users.shawndrost[index];
+              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+         };
+
+        var onlySharksForCheap = function(){
+          var $body = $('body');
+          $body.html('');
+
+            var index = streams.users.sharksforcheap.length - 1;
+            while(index >= 0){
+              var tweet = streams.users.sharksforcheap[index];
+              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+         };
+
+        var onlyMracus = function(){
+          var $body = $('body');
+          $body.html('');
+
+            var index = streams.users.mracus.length - 1;
+            while(index >= 0){
+              var tweet = streams.users.mracus[index];
+              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+         };
+
+        var onlyDouglasCalhoun = function(){
+          var $body = $('body');
+          $body.html('');
+
+            var index = streams.users.douglascalhoun.length - 1;
+            while(index >= 0){
+              var tweet = streams.users.douglascalhoun[index];
+              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+        };
+      
+      allUsers();
+
+      // //Clumsy onclick action to remove non-matching username divs. Would like to use something like !this.username if possible
+        $('.shawndrost').on('click', function () {
+          $('div').remove();
+          autoRefresh(onlyShawnDrost);
+        });
+        $('.sharksforcheap').on('click', function () {
+          $('div').remove();
+          autoRefresh(onlySharksForCheap);
+        });
+        $('.mracus').on('click', function () {
+          $('div').remove();
+          autoRefresh(onlyMracus);
+        });
+        $('.douglascalhoun').on('click', function () {
+          $('div').remove();
+          autoRefresh(onlyDouglasCalhoun);
+        });
+      
       });
 
     </script>
