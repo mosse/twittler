@@ -3,12 +3,16 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <link src="style.css" type="text/css">
+    <link rel=StyleSheet href="style.css" type="text/css">
   </head>
   <body>
+    <div id="Header">
+      <h1>Twittler</h1>
+    </div>
     <script>
 
       $(document).ready(function(){
+
 
       var autoRefresh = function(func){
         setInterval(function(){
@@ -23,7 +27,7 @@
           var index = streams.home.length - 1;
           while(index >= 0){
             var tweet = streams.home[index];
-            var $tweet = $('<div class="' + tweet.user +'"></div>');
+            var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
             $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
@@ -39,7 +43,7 @@
             var index = streams.users.shawndrost.length - 1;
             while(index >= 0){
               var tweet = streams.users.shawndrost[index];
-              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
               $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
@@ -53,7 +57,7 @@
             var index = streams.users.sharksforcheap.length - 1;
             while(index >= 0){
               var tweet = streams.users.sharksforcheap[index];
-              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
               $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
@@ -67,7 +71,7 @@
             var index = streams.users.mracus.length - 1;
             while(index >= 0){
               var tweet = streams.users.mracus[index];
-              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
               $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
@@ -81,7 +85,7 @@
             var index = streams.users.douglascalhoun.length - 1;
             while(index >= 0){
               var tweet = streams.users.douglascalhoun[index];
-              var $tweet = $('<div class="' + tweet.user +'"></div>');
+              var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
               $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
             $tweet.appendTo($body);
             index -= 1;
@@ -90,21 +94,21 @@
       
       allUsers();
 
-      // //Clumsy onclick action to remove non-matching username divs. Would like to use something like !this.username if possible
+      //Clumsy onclick action to remove non-matching username divs. Would like to use something like !this.username if possible
         $('.shawndrost').on('click', function () {
-          $('div').remove();
+          $('.tweetbody').remove();
           autoRefresh(onlyShawnDrost);
         });
         $('.sharksforcheap').on('click', function () {
-          $('div').remove();
+          $('.tweetbody').remove();
           autoRefresh(onlySharksForCheap);
         });
         $('.mracus').on('click', function () {
-          $('div').remove();
+          $('.tweetbody').remove();
           autoRefresh(onlyMracus);
         });
         $('.douglascalhoun').on('click', function () {
-          $('div').remove();
+          $('.tweetbody').remove();
           autoRefresh(onlyDouglasCalhoun);
         });
       
