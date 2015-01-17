@@ -31,6 +31,19 @@
           }, 500);
         };
 
+        var getTweets = function(username){
+          var $tweetstream= $('div.tweetstream');
+          $tweetstream.html('');
+
+          var index = streams.users.username.length - 1;
+           while(index >= 0){
+            var tweet = streams.users.username[index];
+            var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
+            $tweet.append('<h4 class="username">' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+          $tweet.appendTo($tweetstream);
+          index -= 1;
+        }
+
         var allUsers = function(){
           var $tweetstream = $('div.tweetstream');
           $tweetstream.html('');
@@ -110,30 +123,25 @@
         // On-click action for returning to all-users view/refreshing stream
 
         $('button').on('click', function () {
-          $('.tweetbody').remove();
-          allUsers();
+          $('.tweetbody').replaceWith(allUsers());
         });
 
         // On-click actions for filtering by username. Needs refactoring to use something like $(this). Not sure how to do that yet. :)
 
         $('.shawndrost').on('click', function () {
-          $('.tweetbody').remove();
-          onlyShawnDrost();
+          $('.tweetbody').replaceWith(onlyShawnDrost());
         });
         $('.sharksforcheap').on('click', function () {
-          $('.tweetbody').remove();
-          onlySharksForCheap();
+          $('.tweetbody').replaceWith(onlySharksForCheap());
         });
         $('.mracus').on('click', function () {
-          $('.tweetbody').remove();
-          onlyMracus();
+          $('.tweetbody').replaceWith(onlyMracus());
         });
         $('.douglascalhoun').on('click', function () {
-          $('.tweetbody').remove();
-          onlyDouglasCalhoun();
+          $('.tweetbody').replaceWith(onlyDouglasCalhoun());
         });
       
-      });
+      };
 
     </script>
   </body>
