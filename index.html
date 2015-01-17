@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+
+			<script src='jquery.js'></script>
+			<script src='data_generator.js'></script>
+			<link rel=StyleSheet href='style.css' type='text/css'>
+
+		</head>
+		<body>
+
+			<div id='header'>
+				<h1>Twittler</h1>
+				<button>All New Tweets</button>
+			</div>
+
+			<!-- <div id='sidebar'>
+				<button>Refresh</button>
+			 --></div>
+			<!-- <div id='tweetstream-container'> -->
+			<div class='tweetstream'>
+			</div>
+			<!-- </div> -->
+
+			<script>
+
+				$(document).ready(function(){
+
+					// Function to load all tweets within tweetstream
+
+					var getTweets = function(){
+
+					  var $tweetstream= $('div.tweetstream');
+					  $tweetstream.html('');
+
+					  var index = streams.home.length - 1;
+					   while(index >= 0){
+					    var tweet = streams.home[index];
+					    var $tweet = $('<div class="tweetbody ' + tweet.user +'"></div>');
+					    $tweet.append('<h4 class="username ' + tweet.user +'">@' + tweet.user + '</h4><p>' + tweet.message + '</p><h7>' + tweet.created_at + '</h7>');
+					  $tweet.appendTo($tweetstream);
+					  index -= 1;
+						};
+					};
+
+					getTweets();
+
+					// Filter function to remove all elements bar the passed in username. Really hacky way of doing it. Don't like it much but it works.
+
+					var filter = function(tweeter){
+						if (tweeter === 'shawndrost'){
+						 $('.tweetbody').remove('.mracus');
+						 $('.tweetbody').remove('.sharksforcheap');
+						 $('.tweetbody').remove('.douglascalhoun');
+					 	}
+						else if (tweeter === 'mracus'){
+						 $('.tweetbody').remove('.sharksforcheap');
+						 $('.tweetbody').remove('.douglascalhoun');
+						 $('.tweetbody').remove('.shawndrost');
+						}
+						else if (tweeter === 'sharksforcheap'){
+						 $('.tweetbody').remove('.mracus');
+						 $('.tweetbody').remove('.douglascalhoun');
+						 $('.tweetbody').remove('.shawndrost');
+						}
+						else if (tweeter === 'douglascalhoun'){
+						 $('.tweetbody').remove('.mracus');
+						 $('.tweetbody').remove('.sharksforcheap');
+						 $('.tweetbody').remove('.shawndrost');
+						}
+					};
+
+					// Filter invocations by username
+
+					$('.shawndrost').on('click', function () {
+					  filter('shawndrost');
+					});
+
+					$('.sharksforcheap').on('click', function () {
+					  filter('sharksforcheap');
+					});
+
+					$('.mracus').on('click', function () {
+					  filter('mracus');
+					});
+
+					$('.douglascalhoun').on('click', function () {
+					  filter('douglascalhoun');
+					});
+
+					// Onclick action attached to button to reload all tweets within tweetstream
+
+					$('button').on('click', function () {
+					  $('.tweetbody').replaceWith(getTweets());
+					});
+
+					// Autorefresh function that loads all tweets from all users
+
+					// var autoRefresh = function(func){
+					//   setInterval(function(){
+					//     func();
+					//   }, 500);
+					// };
+
+					// Initial pageload
+
+					
+
+				});
+
+			</script>
+		</body>
+	</html>
